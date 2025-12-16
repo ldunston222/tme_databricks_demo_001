@@ -23,25 +23,18 @@ class MetricsTracker:
         self.experiment_name = experiment_name
         mlflow.set_experiment(experiment_name)
     
-    def start_run(self, episode_id: str, tags: Optional[Dict[str, str]] = None) -> str:
+    def start_run(self, episode_id: str, tags: Optional[Dict[str, str]] = None, nested: bool = True) -> str:
         """
         Start a new MLflow run for episode evaluation.
         
         Args:
             episode_id: The episode being evaluated
             tags: Additional tags to attach to the run
+            nested: Whether to use nested runs (default True for sequential evaluations)
         
         Returns:
             The run ID
         """
-        # End any active run before starting a new one (with safety check)
-        try:
-            if mlflow.active_run() is not None:
-                mlflow.end_run()
-        except Exception:
-            # If end_run fails, continue anyway
-            pass
-        
         default_tags = {
             "episode_id": episode_id,
             "component": "evaluator",
@@ -49,24 +42,19 @@ class MetricsTracker:
         if tags:
             default_tags.update(tags)
         
-        # Start new run with nested=True as fallback if there's an active run
-        try:
-            run = mlflow.start_run()
-        except Exception:
-            # If standard start_run fails, try nested
-            run = mlflow.start_run(nested=True)
-        
+        # Use nested=True by default for sequential episode evaluations
+        # This prevents "run already active" errors when evaluating multiple episodes
+        run = mlflow.start_run(nested=nested)
         mlflow.set_tags(default_tags)
         
         return run.info.run_id
     
     def end_run(self) -> None:
-        """End the current MLflow run safely."""
+        """End the current MLflow run (or nested run context)."""
         try:
-            if mlflow.active_run() is not None:
-                mlflow.end_run()
+            mlflow.end_run()
         except Exception:
-            # Run may have already been ended or cleaned up
+            # Nested runs may auto-close; ignore errors
             pass
     
     def log_drift_metric(self, drift_score: float, step: Optional[int] = None) -> None:

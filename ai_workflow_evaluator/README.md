@@ -43,18 +43,24 @@ pip install -e ".[dev]"
 
 ### On Databricks
 
-Upload the project and install the wheel:
+On Databricks, `pyspark` is provided by the runtime, so you typically only need to install this project's wheel (and `mlflow` if your runtime doesn't already include it).
+
+Build a wheel locally:
 
 ```bash
-pip install /path/to/ai_workflow_evaluator
+cd ai_workflow_evaluator
+python -m pip install -U build
+python -m build
+ls -1 dist/*.whl
 ```
 
-Or build a wheel and deploy:
+Then install the wheel in Databricks using one of these common options:
+
+- **Cluster Library**: Compute → your cluster → Libraries → Install New → upload the `.whl` from `dist/`.
+- **Workspace Files / DBFS**: Upload the `.whl`, then:
 
 ```bash
-pip wheel .
-databricks fs cp ai_workflow_evaluator-0.1.0-py3-none-any.whl dbfs:/path/to/wheels/
-# Then reference in cluster libraries or job
+pip install /dbfs/path/to/your-wheel.whl
 ```
 
 ## Quick Start
@@ -98,7 +104,7 @@ print(f"Drift: {metrics['drift']:.4f}")
 print(f"Coherence: {metrics['coherence']:.4f}")
 ```
 
-### Batch Evaluation (Spark DataFrame)
+### Batch Evaluation (e.g., from a Spark DataFrame)
 
 ```python
 from pyspark.sql import SparkSession
@@ -106,7 +112,7 @@ from evaluator import Episode, EpisodeEvaluator
 
 spark = SparkSession.builder.appName("episode_eval").getOrCreate()
 
-# Create DataFrame of episodes and their actual outputs
+# In practice you might build/derive these pairs from a DataFrame and collect()
 episodes_data = [
     (episode1, actual_outputs1),
     (episode2, actual_outputs2),
@@ -251,8 +257,10 @@ See `notebooks/demo_evaluator.ipynb` for a complete working example that:
 ### Running Tests
 
 ```bash
-pytest tests/ -v --cov=evaluator
+pytest -v
 ```
+
+Note: this repo doesn't ship tests yet; add them under `tests/` when ready.
 
 ### Code Quality
 

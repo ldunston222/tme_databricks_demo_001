@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/75d87e155365438894bccf5ac243461d/artifacts
+end_time: 1765853318358
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 75d87e155365438894bccf5ac243461d
+run_name: skittish-shark-366
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765853311279
+status: 3
+tags: []
+user_id: root

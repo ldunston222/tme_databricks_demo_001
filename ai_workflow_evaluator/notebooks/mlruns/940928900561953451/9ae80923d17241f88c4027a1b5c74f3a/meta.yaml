@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/9ae80923d17241f88c4027a1b5c74f3a/artifacts
+end_time: 1765853340937
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 9ae80923d17241f88c4027a1b5c74f3a
+run_name: redolent-roo-408
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765853333240
+status: 3
+tags: []
+user_id: root

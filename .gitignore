@@ -79,6 +79,12 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# MLflow local artifacts
+mlruns/
+
+# Virtual environments
+.venv/
+
 # IPython
 profile_default/
 ipython_config.py

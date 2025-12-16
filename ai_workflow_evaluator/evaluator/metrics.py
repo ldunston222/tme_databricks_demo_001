@@ -34,6 +34,10 @@ class MetricsTracker:
         Returns:
             The run ID
         """
+        # End any active run before starting a new one
+        if mlflow.active_run() is not None:
+            mlflow.end_run()
+        
         default_tags = {
             "episode_id": episode_id,
             "component": "evaluator",

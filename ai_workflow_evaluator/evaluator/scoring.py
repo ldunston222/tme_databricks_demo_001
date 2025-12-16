@@ -90,6 +90,14 @@ class EpisodeEvaluator:
                 "results": [],
             }
         
+        # Ensure clean state before batch evaluation
+        import mlflow
+        try:
+            while mlflow.active_run() is not None:
+                mlflow.end_run()
+        except Exception:
+            pass
+        
         batch_results = []
         match_results = []
         drifts = []
@@ -97,18 +105,35 @@ class EpisodeEvaluator:
         total_tokens = 0
         
         for episode, actual_outputs in episodes_with_outputs:
-            match_result, metrics = self.evaluate_episode(episode, actual_outputs)
-            
-            batch_results.append({
-                "episode_id": episode.episode_id,
-                "match_result": match_result,
-                "metrics": metrics,
-            })
-            
-            match_results.append(match_result)
-            drifts.append(metrics["drift"])
-            coherences.append(metrics["coherence"])
-            total_tokens += episode.token_counts.get("input_tokens", 0) + episode.token_counts.get("output_tokens", 0)
+            try:
+                match_result, metrics = self.evaluate_episode(episode, actual_outputs)
+                
+                batch_results.append({
+                    "episode_id": episode.episode_id,
+                    "match_result": match_result,
+                    "metrics": metrics,
+                })
+                
+                match_results.append(match_result)
+                drifts.append(metrics["drift"])
+                coherences.append(metrics["coherence"])
+                total_tokens += episode.token_counts.get("input_tokens", 0) + episode.token_counts.get("output_tokens", 0)
+            except Exception as e:
+                print(f"Warning: Failed to evaluate episode {episode.episode_id}: {str(e)}")
+                # End any hanging run and continue
+                try:
+                    mlflow.end_run()
+                except Exception:
+                    pass
+                continue
+        
+        if not match_results:
+            return {
+                "batch_id": batch_id,
+                "episodes_count": len(episodes_with_outputs),
+                "results": batch_results,
+                "summary": {"error": "No episodes evaluated successfully"},
+            }
         
         # Compute batch aggregates
         avg_drift = statistics.mean(drifts)

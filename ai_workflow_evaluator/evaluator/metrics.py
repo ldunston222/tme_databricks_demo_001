@@ -34,9 +34,13 @@ class MetricsTracker:
         Returns:
             The run ID
         """
-        # End any active run before starting a new one
-        if mlflow.active_run() is not None:
-            mlflow.end_run()
+        # End any active run before starting a new one (with safety check)
+        try:
+            if mlflow.active_run() is not None:
+                mlflow.end_run()
+        except Exception:
+            # If end_run fails, continue anyway
+            pass
         
         default_tags = {
             "episode_id": episode_id,
@@ -45,14 +49,25 @@ class MetricsTracker:
         if tags:
             default_tags.update(tags)
         
-        run = mlflow.start_run()
+        # Start new run with nested=True as fallback if there's an active run
+        try:
+            run = mlflow.start_run()
+        except Exception:
+            # If standard start_run fails, try nested
+            run = mlflow.start_run(nested=True)
+        
         mlflow.set_tags(default_tags)
         
         return run.info.run_id
     
     def end_run(self) -> None:
-        """End the current MLflow run."""
-        mlflow.end_run()
+        """End the current MLflow run safely."""
+        try:
+            if mlflow.active_run() is not None:
+                mlflow.end_run()
+        except Exception:
+            # Run may have already been ended or cleaned up
+            pass
     
     def log_drift_metric(self, drift_score: float, step: Optional[int] = None) -> None:
         """

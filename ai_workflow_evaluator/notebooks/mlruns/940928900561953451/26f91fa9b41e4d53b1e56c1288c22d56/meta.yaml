@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/26f91fa9b41e4d53b1e56c1288c22d56/artifacts
+end_time: 1765859284051
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 26f91fa9b41e4d53b1e56c1288c22d56
+run_name: ambitious-conch-119
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859276478
+status: 3
+tags: []
+user_id: root

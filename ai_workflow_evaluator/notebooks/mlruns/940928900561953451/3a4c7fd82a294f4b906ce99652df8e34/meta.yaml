@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/3a4c7fd82a294f4b906ce99652df8e34/artifacts
+end_time: 1765859655944
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 3a4c7fd82a294f4b906ce99652df8e34
+run_name: nimble-wren-792
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859648416
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/48529a68ddb14885810d24c13157c5f0/artifacts
+end_time: 1765858408916
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 48529a68ddb14885810d24c13157c5f0
+run_name: crawling-ray-698
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765858400701
+status: 3
+tags: []
+user_id: root

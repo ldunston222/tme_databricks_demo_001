@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/199407e2f2ff41ce828c0b632cf18748/artifacts
+end_time: 1765858385861
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 199407e2f2ff41ce828c0b632cf18748
+run_name: sneaky-crane-177
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765858378429
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/032c6cc39e2a419a95e0b88c60e8a7bf/artifacts
+end_time: 1765859796350
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 032c6cc39e2a419a95e0b88c60e8a7bf
+run_name: big-bear-179
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859788066
+status: 3
+tags: []
+user_id: root

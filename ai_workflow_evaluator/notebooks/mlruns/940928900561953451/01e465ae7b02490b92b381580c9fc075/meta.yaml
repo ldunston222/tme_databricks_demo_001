@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/01e465ae7b02490b92b381580c9fc075/artifacts
+end_time: 1765859779930
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 01e465ae7b02490b92b381580c9fc075
+run_name: rare-chimp-146
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859772437
+status: 3
+tags: []
+user_id: root

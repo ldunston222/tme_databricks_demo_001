@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/f1c8d9f18a7a4bc19c0de808ef80f674/artifacts
+end_time: 1765859518244
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: f1c8d9f18a7a4bc19c0de808ef80f674
+run_name: unleashed-zebra-53
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859511375
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/0ed4c2d2e4ed43938c581d02be91ec3a/artifacts
+end_time: 1765859811577
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 0ed4c2d2e4ed43938c581d02be91ec3a
+run_name: enchanting-ox-713
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859804113
+status: 3
+tags: []
+user_id: root

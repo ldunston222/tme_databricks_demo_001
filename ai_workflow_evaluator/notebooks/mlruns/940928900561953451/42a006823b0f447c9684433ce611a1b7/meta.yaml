@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/42a006823b0f447c9684433ce611a1b7/artifacts
+end_time: 1765858377529
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 42a006823b0f447c9684433ce611a1b7
+run_name: upset-crane-474
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765858370811
+status: 3
+tags: []
+user_id: root

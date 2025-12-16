@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/94ad173e0296460db16dbc32b299954a/artifacts
+end_time: 1765859486475
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 94ad173e0296460db16dbc32b299954a
+run_name: funny-panda-806
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859478494
+status: 3
+tags: []
+user_id: root

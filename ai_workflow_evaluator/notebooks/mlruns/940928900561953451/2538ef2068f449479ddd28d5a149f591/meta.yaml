@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/2538ef2068f449479ddd28d5a149f591/artifacts
+end_time: 1765859120330
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 2538ef2068f449479ddd28d5a149f591
+run_name: resilient-frog-29
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859111970
+status: 3
+tags: []
+user_id: root

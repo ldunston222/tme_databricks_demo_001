@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/5cf023b8ef6d4ee89bd53dcf1c5cfcc9/artifacts
+end_time: 1765859640278
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 5cf023b8ef6d4ee89bd53dcf1c5cfcc9
+run_name: crawling-mare-143
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859632852
+status: 3
+tags: []
+user_id: root

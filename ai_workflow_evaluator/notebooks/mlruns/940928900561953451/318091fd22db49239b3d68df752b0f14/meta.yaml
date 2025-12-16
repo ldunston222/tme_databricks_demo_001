@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/318091fd22db49239b3d68df752b0f14/artifacts
+end_time: 1765859495063
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 318091fd22db49239b3d68df752b0f14
+run_name: stately-hare-644
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765859486508
+status: 3
+tags: []
+user_id: root

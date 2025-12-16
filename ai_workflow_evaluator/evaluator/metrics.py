@@ -1,10 +1,11 @@
 """Metrics module - defines metrics tracking for episodes."""
 
 from typing import Dict, Any, Optional
-import json
-import mlflow
-import mlflow.entities
-from datetime import datetime
+
+try:
+    import mlflow  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    mlflow = None
 
 
 class MetricsTracker:
@@ -21,6 +22,14 @@ class MetricsTracker:
             experiment_name: MLflow experiment name for tracking runs
         """
         self.experiment_name = experiment_name
+
+        if mlflow is None:
+            raise RuntimeError(
+                "mlflow is required to use MetricsTracker. "
+                "Install mlflow (or run on Databricks where it is provided), "
+                "or pass a custom metrics tracker into EpisodeEvaluator."
+            )
+
         mlflow.set_experiment(experiment_name)
     
     def start_run(self, episode_id: str, tags: Optional[Dict[str, str]] = None, nested: bool = True) -> str:

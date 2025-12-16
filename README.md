@@ -7,6 +7,7 @@ This repo contains the **AI Workflow Evaluator** Databricks wheel/job for evalua
 - Main package and docs: `ai_workflow_evaluator/`
 - Detailed README: `ai_workflow_evaluator/README.md`
 - Notebooks: `ai_workflow_evaluator/notebooks/`
+- Lakehouse schema DDL: `ai_workflow_evaluator/datamodel/datamodel_db_ddl.sql`
 
 ## Quick start
 

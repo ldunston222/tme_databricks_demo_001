@@ -26,11 +26,24 @@ ai_workflow_evaluator/
 │   ├── metrics.py           # MetricsTracker - MLflow integration
 │   ├── scoring.py           # EpisodeEvaluator - idempotency checks
 │   └── invariants.py        # Validation rules and assertions
+├── datamodel/
+│   └── datamodel_db_ddl.sql  # Delta/UC DDL for episodes + evaluations
 ├── notebooks/
-│   └── demo_evaluator.ipynb # Demo notebook showing usage
+│   ├── demo_evaluator.ipynb             # Demo notebook showing usage
+│   ├── setup_datamodel_db.ipynb         # Creates `datamodel_db` schema + tables
+│   └── seed_and_browse_datamodel_db.ipynb # Optional: inserts minimal seed data
 ├── pyproject.toml           # Build configuration, dependencies
 └── README.md                # This file
 ```
+
+## Lakehouse Data Model (Delta/UC)
+
+The repo includes a minimal, versioned “episode lakehouse” schema named `datamodel_db`.
+
+- DDL: `ai_workflow_evaluator/datamodel/datamodel_db_ddl.sql`
+- Notebooks: `ai_workflow_evaluator/notebooks/setup_datamodel_db.ipynb` and `ai_workflow_evaluator/notebooks/seed_and_browse_datamodel_db.ipynb`
+
+`episode.status` is constrained to: `completed | failed | partial`.
 
 ## Installation
 

@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-workflow-evaluator"
+version = "0.1.0"
+description = "A Databricks Spark job for evaluating AI workflow episode idempotency and immutability"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "TME", email = "tme@infoblox.com"}
+]
+keywords = ["databricks", "spark", "ai", "mlflow", "episode", "idempotency"]
+
+dependencies = [
+    "pyspark>=3.3.0",
+    "mlflow>=2.0.0",
+    "pandas>=1.5.0",
+    "numpy>=1.23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=22.0",
+    "flake8>=4.0",
+    "mypy>=0.990",
+]
+
+[tool.setuptools]
+packages = ["evaluator"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

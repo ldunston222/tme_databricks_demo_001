@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/7661726c3fea453c92be216ccc493b44/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 7661726c3fea453c92be216ccc493b44
+run_name: magnificent-cod-409
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765855285197
+status: 1
+tags: []
+user_id: root

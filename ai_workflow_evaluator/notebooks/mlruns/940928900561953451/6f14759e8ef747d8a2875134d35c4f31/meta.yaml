@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/6f14759e8ef747d8a2875134d35c4f31/artifacts
+end_time: 1765855285173
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 6f14759e8ef747d8a2875134d35c4f31
+run_name: intelligent-yak-957
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765855278040
+status: 3
+tags: []
+user_id: root

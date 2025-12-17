@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/704e2b14d04f485a951d32174379428b/artifacts
+end_time: 1765867041854
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 704e2b14d04f485a951d32174379428b
+run_name: secretive-hen-991
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765867033685
+status: 3
+tags: []
+user_id: root

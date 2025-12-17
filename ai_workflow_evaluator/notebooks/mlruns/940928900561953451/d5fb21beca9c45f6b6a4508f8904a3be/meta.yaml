@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/d5fb21beca9c45f6b6a4508f8904a3be/artifacts
+end_time: 1765865581375
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: d5fb21beca9c45f6b6a4508f8904a3be
+run_name: wise-ram-52
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765865572329
+status: 3
+tags: []
+user_id: root

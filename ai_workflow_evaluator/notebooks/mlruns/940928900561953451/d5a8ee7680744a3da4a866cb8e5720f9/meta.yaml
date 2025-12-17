@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/d5a8ee7680744a3da4a866cb8e5720f9/artifacts
+end_time: 1765865571322
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: d5a8ee7680744a3da4a866cb8e5720f9
+run_name: popular-gnat-314
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765865563067
+status: 3
+tags: []
+user_id: root

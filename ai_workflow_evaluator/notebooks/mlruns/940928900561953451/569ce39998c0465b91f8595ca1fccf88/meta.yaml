@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/569ce39998c0465b91f8595ca1fccf88/artifacts
+end_time: 1765867049647
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: 569ce39998c0465b91f8595ca1fccf88
+run_name: serious-ray-447
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765867041876
+status: 3
+tags: []
+user_id: root

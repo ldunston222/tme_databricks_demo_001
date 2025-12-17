@@ -1,0 +1,14 @@
+artifact_uri: /Workspace/Users/ldunston@engineering-infoblox.com/tme_databricks_demo_001/ai_workflow_evaluator/notebooks/mlruns/940928900561953451/fc3b0adc37b34cff9c4694122d662255/artifacts
+end_time: 1765867092020
+entry_point_name: ''
+experiment_id: '940928900561953451'
+lifecycle_stage: active
+run_id: fc3b0adc37b34cff9c4694122d662255
+run_name: youthful-mink-859
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765867082416
+status: 3
+tags: []
+user_id: root

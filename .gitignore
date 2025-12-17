@@ -81,6 +81,9 @@ target/
 
 # MLflow local artifacts
 mlruns/
+mlartifacts/
+.mlflow/
+mlflow.db
 
 # Terraform (keep .terraform.lock.hcl committable)
 **/.terraform/

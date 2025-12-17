@@ -82,6 +82,25 @@ target/
 # MLflow local artifacts
 mlruns/
 
+# Terraform (keep .terraform.lock.hcl committable)
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfplan
+**/*.tfplan.*
+**/crash.log
+**/crash.*.log
+**/terraform.tfvars
+**/terraform.tfvars.json
+**/override.tf
+**/override.tf.json
+**/*_override.tf
+**/*_override.tf.json
+
+# Local lab artifacts (DBFS/Delta are the source of truth)
+**/artifacts/
+**/tf_outputs.json
+
 # Virtual environments
 .venv/
 

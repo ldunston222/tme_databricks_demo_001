@@ -43,7 +43,7 @@ The repo includes a minimal, versioned “episode lakehouse” schema named `dat
 - DDL: `ai_workflow_evaluator/datamodel/datamodel_db_ddl.sql`
 - Notebooks: `ai_workflow_evaluator/notebooks/setup_datamodel_db.ipynb` and `ai_workflow_evaluator/notebooks/seed_and_browse_datamodel_db.ipynb`
 
-`episode.status` is constrained to: `completed | failed | partial`.
+`episode.status` is constrained to: `successful | degraded | failed`.
 
 ## Installation
 

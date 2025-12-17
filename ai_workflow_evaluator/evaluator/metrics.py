@@ -1,5 +1,6 @@
 """Metrics module - defines metrics tracking for episodes."""
 
+import os
 from typing import Dict, Any, Optional
 
 try:
@@ -30,7 +31,21 @@ class MetricsTracker:
                 "or pass a custom metrics tracker into EpisodeEvaluator."
             )
 
-        mlflow.set_experiment(experiment_name)
+        # On Databricks, always use the Databricks MLflow backend (not a local file store).
+        # Also, Databricks experiments are typically addressed by workspace path.
+        is_databricks = bool(os.environ.get("DATABRICKS_RUNTIME_VERSION"))
+        if is_databricks:
+            try:
+                mlflow.set_tracking_uri("databricks")
+            except Exception:
+                # If the runtime already configured MLflow, don't fail initialization.
+                pass
+
+        experiment_to_set = experiment_name
+        if is_databricks and experiment_name and not experiment_name.startswith("/"):
+            experiment_to_set = f"/Shared/{experiment_name}"
+
+        mlflow.set_experiment(experiment_to_set)
     
     def start_run(self, episode_id: str, tags: Optional[Dict[str, str]] = None, nested: bool = True) -> str:
         """

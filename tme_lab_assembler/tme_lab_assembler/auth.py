@@ -8,7 +8,12 @@ from typing import Any
 
 
 def _run_cli(cmd: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, check=False, capture_output=True, text=True)
+    try:
+        return subprocess.run(cmd, check=False, capture_output=True, text=True)
+    except FileNotFoundError as e:
+        # Many Databricks runtimes don't ship cloud CLIs (aws/az/gcloud).
+        # Treat as a normal command failure so callers can surface a clean status.
+        return subprocess.CompletedProcess(cmd, 127, stdout="", stderr=str(e))
 
 
 def _ensure_aws_sso_profile(

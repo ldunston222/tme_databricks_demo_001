@@ -36,7 +36,12 @@ The notebook reads these environment variables (with defaults):
 - Persistence: `PERSIST_MODE` (`dbfs|table|both`), `ARTIFACT_DBFS_DIR`, `ARTIFACT_TABLE`
 
 ## Notes
-- The notebook assumes a `terraform` binary is available on the cluster driver.
+- Terraform CLI:
+  - Recommended: install `terraform` on the cluster driver via an init script.
+    - This repo includes `tme_lab_assembler/infra/databricks/init-scripts/install_terraform.sh`.
+    - Upload it to DBFS (example): `dbfs:/databricks/init/install_terraform.sh` and attach it to the cluster.
+  - Convenience (Databricks): if `terraform` is not on `PATH`, the wrapper will auto-download a pinned Terraform binary to `/tmp`.
+    - Control with `TERRAFORM_AUTO_INSTALL` (`1`/`0`) and `TERRAFORM_VERSION`.
 - Cloud SSO uses provider CLIs (`aws`, `az`, `gcloud`) if present; in headless runtimes, device-code/no-browser flows are preferred.
 - Persistence defaults to DBFS (e.g. `dbfs:/FileStore/tme_lab_assembler/artifacts`). Delta-table persistence is optional (`tme_lab_assembler.artifacts`).
 - Cleanup: call `destroy()` in the notebook to run `terraform destroy` and remove persisted artifact(s).

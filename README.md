@@ -8,7 +8,7 @@ This repo is evolving into a **TME lab assembler**: a reproducible way to build 
 
 - `tme_lab_assembler/` (MVP)
 	- Atomic unit: a Databricks notebook that runs Terraform, optionally runs cloud SDK steps, and writes an `artifact.json` record to DBFS and/or a Delta table.
-	- Notebook: `tme_lab_assembler/notebooks/lab_assembler_mvp.ipynb`
+	- Notebook: `tme_lab_assembler/notebooks/lab_assembler_mvp.py`
 	- Terraform skeleton: `tme_lab_assembler/infra/terraform/mvp/`
 
 - `ai_workflow_evaluator/`
@@ -21,7 +21,7 @@ This repo is evolving into a **TME lab assembler**: a reproducible way to build 
 
 ### Lab assembler (Databricks notebook)
 
-- Open `tme_lab_assembler/notebooks/lab_assembler_mvp.ipynb` in Databricks.
+- Open `tme_lab_assembler/notebooks/lab_assembler_mvp.py` in Databricks.
 - Run cells top-to-bottom. It will:
 	- (optionally) trigger cloud SSO login via CLI (AWS/Azure/GCP)
 	- run `terraform init` + `terraform apply`

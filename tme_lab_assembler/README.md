@@ -4,7 +4,7 @@ MVP goal: one Databricks notebook that provisions infra with Terraform, establis
 
 ## Key paths
 - Notebook (Databricks source, merge-friendly): `tme_lab_assembler/notebooks/lab_assembler_mvp.py`
-- (Optional) Notebook JSON (VS Code preview only): `tme_lab_assembler/notebooks/lab_assembler_mvp.ipynb`
+- (Optional) Notebook JSON (VS Code preview only): `tme_lab_assembler/notebooks/lab_assembler_mvp_local.ipynb`
 - Terraform module: `tme_lab_assembler/infra/terraform/mvp/`
 
 ## Artifact shape
@@ -47,4 +47,4 @@ The notebook reads these environment variables (with defaults):
 - Keep substantial logic in importable modules under `tme_lab_assembler/tme_lab_assembler/` and keep the notebook as an orchestrator.
 
 If you ever need to regenerate the Databricks source notebook from the `.ipynb`:
-- `python tme_lab_assembler/tools/ipynb_to_databricks_py.py tme_lab_assembler/notebooks/lab_assembler_mvp.ipynb`
+- `python tme_lab_assembler/tools/ipynb_to_databricks_py.py tme_lab_assembler/notebooks/lab_assembler_mvp_local.ipynb`

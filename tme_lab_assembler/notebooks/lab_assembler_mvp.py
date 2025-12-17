@@ -33,7 +33,7 @@ CLOUD = os.getenv('CLOUD', 'aws')  # aws|azure|gcp
 
 # In headless environments, prefer device-code / no-browser flows.
 
-AUTH_ENABLED = os.getenv('AUTH_ENABLED', '1') == '1'
+AUTH_ENABLED = os.getenv('AUTH_ENABLED', '1') == '0'
 
 AWS_PROFILE = os.getenv('AWS_PROFILE', 'default')
 
@@ -112,6 +112,7 @@ print('IS_DATABRICKS:', IS_DATABRICKS)
 print('TF_DIR:', Path(TF_DIR).resolve())
 
 # COMMAND ----------
+
 def terraform_init():
 
     r = terraform.init(TF_DIR)
@@ -151,6 +152,7 @@ def terraform_outputs_json():
 print('Helpers ready')
 
 # COMMAND ----------
+
 # Auth (SSO)
 
 auth_info = auth.auth_sso(
@@ -178,6 +180,7 @@ auth_info = auth.auth_sso(
 auth_info
 
 # COMMAND ----------
+
 # Provision
 
 terraform_init()
@@ -189,6 +192,7 @@ tf_outputs = terraform_outputs_json()
 print('Terraform outputs keys:', list(tf_outputs.keys()))
 
 # COMMAND ----------
+
 # Build artifact (first handoff record)
 
 artifact = {
@@ -210,6 +214,7 @@ artifact = {
 artifact
 
 # COMMAND ----------
+
 # Persist artifact to DBFS and/or Delta table
 
 artifact_dbfs_path = None
@@ -261,6 +266,7 @@ if PERSIST_MODE in ('table', 'both'):
 artifact_dbfs_path
 
 # COMMAND ----------
+
 # Cleanup / destroy
 
 # - destroys infra via Terraform

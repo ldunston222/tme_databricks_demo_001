@@ -23,6 +23,11 @@ The current MVP is intentionally simple: a Databricks notebook generates a Terra
 - `${TF_RUNS_DBFS_DIR}/inputs/<run_id>.tfvars.json`
 - Keys today: `env_name`, `cloud`
 
+First MVP infrastructure target (Azure):
+- Terraform module: `tme_lab_assembler/infra/terraform/azure_nginx_lb_dns/`
+- Provisions: VNet + 2 Nginx Linux VMs + public load balancer + Azure DNS records
+- DNS caveat: public resolution of `joespizza.com` requires delegating the domain at your registrar to the Azure DNS name servers
+
 If you want to extend the notebook beyond tfvars generation (e.g., consume outputs, write a full artifact record), start from:
 - `tme_lab_assembler/notebooks/lab_assembler_mvp.py`
 

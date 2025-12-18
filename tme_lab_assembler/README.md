@@ -8,6 +8,20 @@ MVP goal: one Databricks notebook that provisions infra with Terraform, establis
 - (Optional) Notebook JSON (VS Code preview only): `tme_lab_assembler/notebooks/lab_assembler_mvp_local.ipynb`
 - Terraform module: `tme_lab_assembler/infra/terraform/mvp/`
 
+## Azure reference module (first MVP target)
+
+This repo includes an Azure-only reference module that provisions a small, reliable baseline:
+- VNet + subnet + NSG
+- 2 Ubuntu Linux VMs with Nginx installed via cloud-init
+- Public load balancer on port 80
+- Azure DNS zone + A records (root + vm1/vm2)
+
+Module path:
+- `tme_lab_assembler/infra/terraform/azure_nginx_lb_dns/`
+
+DNS note:
+- Creating an Azure DNS zone named `joespizza.com` will succeed, but **public resolution requires you to delegate the domain at your registrar to the Azure DNS name servers** for that zone.
+
 ## Tfvars-only notebook (current MVP)
 
 If you want to start with *only* generating Terraform inputs (no apply/destroy), run:
@@ -19,12 +33,28 @@ It writes a single `tfvars.json` to DBFS (stable handoff contract):
 
 Inputs (env vars):
 - `ENV_NAME` (default `demo1`)
-- `CLOUD` (default `aws`) — `aws|azure|gcp`
+- `CLOUD` (default `azure`) — `aws|azure|gcp`
 - `TF_RUN_ID` (optional; otherwise auto-generated)
+
+Azure env vars (used when `CLOUD=azure`):
+- `AZ_LOCATION` (default `eastus`)
+- `AZ_ADMIN_USERNAME` (default `azureuser`)
+- `AZ_SSH_PUBLIC_KEY` (required; OpenSSH public key string)
+- `AZ_VM_SIZE` (default `Standard_B1s`)
+- `AZ_DNS_ZONE_NAME` (default `joespizza.com`)
+- `AZ_CREATE_DNS_ZONE` (default `1`)
 
 Payload keys (current):
 - `env_name`
 - `cloud`
+
+Azure payload keys (when `CLOUD=azure`):
+- `location`
+- `admin_username`
+- `ssh_public_key`
+- `vm_size`
+- `dns_zone_name`
+- `create_dns_zone`
 
 ## Artifact shape
 The notebook emits an `artifact` dict like:

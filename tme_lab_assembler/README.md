@@ -4,8 +4,27 @@ MVP goal: one Databricks notebook that provisions infra with Terraform, establis
 
 ## Key paths
 - Notebook (Databricks source, merge-friendly): `tme_lab_assembler/notebooks/lab_assembler_mvp.py`
+- Tfvars-only notebook (Databricks source): `tme_lab_assembler/notebooks/lab_assembler_tfvars.py`
 - (Optional) Notebook JSON (VS Code preview only): `tme_lab_assembler/notebooks/lab_assembler_mvp_local.ipynb`
 - Terraform module: `tme_lab_assembler/infra/terraform/mvp/`
+
+## Tfvars-only notebook (current MVP)
+
+If you want to start with *only* generating Terraform inputs (no apply/destroy), run:
+- `tme_lab_assembler/notebooks/lab_assembler_tfvars.py`
+
+It writes a single `tfvars.json` to DBFS (stable handoff contract):
+- Base dir: `TF_RUNS_DBFS_DIR` (default `dbfs:/FileStore/tme_lab_assembler/terraform_runs`)
+- File: `${TF_RUNS_DBFS_DIR}/inputs/<run_id>.tfvars.json`
+
+Inputs (env vars):
+- `ENV_NAME` (default `demo1`)
+- `CLOUD` (default `aws`) — `aws|azure|gcp`
+- `TF_RUN_ID` (optional; otherwise auto-generated)
+
+Payload keys (current):
+- `env_name`
+- `cloud`
 
 ## Artifact shape
 The notebook emits an `artifact` dict like:
@@ -37,10 +56,12 @@ The notebook reads these environment variables (with defaults):
 
 ## Notes
 - Terraform CLI:
-  - Recommended: install `terraform` on the cluster driver via an init script.
+  - Recommended (production-like): run Terraform outside Databricks (CI runner / GitHub Actions) and have the notebook only generate inputs (tfvars) and optionally consume outputs.
+    - Inputs are written to: `${TF_RUNS_DBFS_DIR}/inputs/<run_id>.tfvars.json`.
+  - Alternative (demo/dev): install `terraform` on the cluster driver via an init script.
     - This repo includes `tme_lab_assembler/infra/databricks/init-scripts/install_terraform.sh`.
     - Upload it to DBFS (example): `dbfs:/databricks/init/install_terraform.sh` and attach it to the cluster.
-  - Convenience (Databricks): if `terraform` is not on `PATH`, the wrapper will auto-download a pinned Terraform binary to `/tmp`.
+  - Convenience (Databricks): if `terraform` is not on `PATH`, the wrapper can auto-download a pinned Terraform binary to `/tmp`.
     - Control with `TERRAFORM_AUTO_INSTALL` (`1`/`0`) and `TERRAFORM_VERSION`.
 - Cloud SSO uses provider CLIs (`aws`, `az`, `gcloud`) if present; in headless runtimes, device-code/no-browser flows are preferred.
 - Persistence defaults to DBFS (e.g. `dbfs:/FileStore/tme_lab_assembler/artifacts`). Delta-table persistence is optional (`tme_lab_assembler.artifacts`).

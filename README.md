@@ -1,39 +1,77 @@
 # tme_databricks_demo_001
 
-This repo is evolving into a **TME lab assembler**: a reproducible way to build hands-on labs using **GitHub + Databricks notebooks + Terraform + public cloud SDKs**, with a durable **artifact handoff** contract.
+This repo is evolving into a **TME lab assembler**: a reproducible way to build hands-on labs using **GitHub + Databricks notebooks + Terraform + cloud SDKs**, with a stable **handoff contract** (inputs/outputs/artifacts).
 
-`ai_workflow_evaluator/` remains important and will be used later as the “episode engine” to evaluate and operationalize AI-driven workflows that can help generate/validate lab assets (e.g., notebook generation, step scoring, drift checks).
+Key subprojects:
+- Lab assembler (infra + notebook patterns): `tme_lab_assembler/`
+- AI workflow evaluator (episode engine + MLflow metrics): `ai_workflow_evaluator/`
 
-## Components
+## How to use and build a simple notebook
 
-- `tme_lab_assembler/` (MVP)
-	- Atomic unit: a Databricks notebook that runs Terraform, optionally runs cloud SDK steps, and writes an `artifact.json` record to DBFS and/or a Delta table.
-	- Notebook: `tme_lab_assembler/notebooks/lab_assembler_mvp.py`
-	- Terraform skeleton: `tme_lab_assembler/infra/terraform/mvp/`
+The current MVP is intentionally simple: a Databricks notebook generates a Terraform `tfvars.json` and stores it to a stable DBFS location.
 
-- `ai_workflow_evaluator/`
-	- Databricks wheel/job to evaluate “episodes” and log metrics to MLflow.
-	- Docs: `ai_workflow_evaluator/README.md`
-	- Notebooks: `ai_workflow_evaluator/notebooks/`
-	- Lakehouse schema: `ai_workflow_evaluator/datamodel/datamodel_db_ddl.sql`
+1) In Databricks, open and run:
+- `tme_lab_assembler/notebooks/lab_assembler_tfvars.py`
 
-## Quick start
+2) Configure inputs via environment variables (optional):
+- `ENV_NAME` (default `demo1`)
+- `CLOUD` (default `aws`) — `aws|azure|gcp`
+- `TF_RUNS_DBFS_DIR` (default `dbfs:/FileStore/tme_lab_assembler/terraform_runs`)
+- `TF_RUN_ID` (optional; otherwise auto-generated)
 
-### Lab assembler (Databricks notebook)
+3) Output contract (what the notebook writes):
+- `${TF_RUNS_DBFS_DIR}/inputs/<run_id>.tfvars.json`
+- Keys today: `env_name`, `cloud`
 
-- Open `tme_lab_assembler/notebooks/lab_assembler_mvp.py` in Databricks.
-- Run cells top-to-bottom. It will:
-	- (optionally) trigger cloud SSO login via CLI (AWS/Azure/GCP)
-	- run `terraform init` + `terraform apply`
-	- write `artifact.json` to DBFS (and optionally a Delta table)
-	- provide a `destroy()` helper to tear down infra and cleanup persisted artifacts
+If you want to extend the notebook beyond tfvars generation (e.g., consume outputs, write a full artifact record), start from:
+- `tme_lab_assembler/notebooks/lab_assembler_mvp.py`
 
-### AI workflow evaluator (wheel)
+Merge-friendly tip:
+- Treat Databricks source notebooks (`# Databricks notebook source` / `# COMMAND ----------`) as the canonical artifact in Git.
 
-```bash
-cd ai_workflow_evaluator
-python -m pip install -U build
-python -m build
+## End-to-end workflow (how the system works)
+
+At a high level, notebooks produce inputs, Terraform provisions infrastructure, and outputs are written back to a stable location so downstream steps (including notebooks and lab platforms) can consume them.
+
+```mermaid
+flowchart LR
+  A[Author notebook in Git] --> B[Run notebook in Databricks]
+  B --> C[Write tfvars.json to DBFS]
+  C --> D[Terraform runner applies module]
+  D --> E[Write outputs/state back to DBFS]
+  E --> F[Notebook consumes outputs]
+  F --> G[Emit artifact.json handoff]
+  G --> H[Lab delivery (e.g., Instruqt) + docs]
+  F --> I[Optional: AI workflow evaluator + MLflow]
 ```
 
-On Databricks, install the wheel and run the Workflows Python wheel entrypoint `ai-workflow-evaluator-job` (details in `ai_workflow_evaluator/README.md`).
+Implementation notes:
+- DBFS is used as the “handoff store” for inputs/outputs/state in the MVP.
+- Terraform can be executed outside Databricks (recommended) or inside Databricks (demo/dev).
+
+Where to look:
+- Lab assembler docs: `tme_lab_assembler/README.md`
+- Terraform MVP module: `tme_lab_assembler/infra/terraform/mvp/`
+- Evaluator docs: `ai_workflow_evaluator/README.md`
+
+## Contributing
+
+Two high-value contribution paths:
+
+1) Curate “golden” notebooks
+- Add or improve notebooks under `tme_lab_assembler/notebooks/` that demonstrate a clean, reusable pattern (inputs → DBFS contract → outputs/artifact).
+- Keep notebooks merge-friendly (prefer Databricks source `.py` over `.ipynb`).
+- Document expected environment variables and the exact DBFS paths produced/consumed.
+
+2) Build more Terraform modules and scripts
+- Add Terraform modules under `tme_lab_assembler/infra/terraform/<module_name>/`.
+- Keep the input contract explicit (what keys you expect in tfvars) and the output contract stable.
+- Update the relevant README(s) to describe how the notebook produces inputs for the module.
+
+General contribution guidelines:
+- Prefer small, composable changes with clear contracts.
+- Avoid committing generated artifacts (e.g., MLflow local tracking directories).
+
+## Vision
+
+Over time, this can grow into a more “product-like” workflow where a simple GUI helps authors generate notebooks/inputs, trigger runners, view outputs, and manage reusable golden assets.

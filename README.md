@@ -47,7 +47,16 @@ flowchart LR
 
 Implementation notes:
 - DBFS is used as the “handoff store” for inputs/outputs/state in the MVP.
-- Terraform can be executed outside Databricks (recommended) or inside Databricks (demo/dev).
+- Terraform is intended to run outside Databricks (recommended). A runner (e.g., GitHub Actions) reads inputs from DBFS and writes results back.
+
+DBFS contract (defaults shown):
+- `TF_RUNS_DBFS_DIR=dbfs:/FileStore/tme_lab_assembler/terraform_runs`
+- Inputs: `${TF_RUNS_DBFS_DIR}/inputs/<run_id>.tfvars.json`
+- Results (optional): `${TF_RUNS_DBFS_DIR}/results/<run_id>.outputs.json`
+- State (optional): `${TF_RUNS_DBFS_DIR}/state/<run_id>/terraform.tfstate`
+
+Runner reference:
+- GitHub Actions Terraform runner workflow: `.github/workflows/tme_lab_assembler_terraform.yml`
 
 Where to look:
 - Lab assembler docs: `tme_lab_assembler/README.md`
